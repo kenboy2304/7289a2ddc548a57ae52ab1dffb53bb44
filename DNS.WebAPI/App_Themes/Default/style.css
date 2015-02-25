@@ -1,0 +1,631 @@
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic&subset=latin,vietnamese,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700&subset=latin,vietnamese,latin-ext);
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+strong {
+	font-weight: 700;
+}
+
+/***** GENERAL SETTING *****
+ ***************************/
+
+/* Hack clearfix */
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1; /* ie 6/7 */
+}
+/* End hack clearfix */
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Open Sans Condensed", sans-serif;
+}
+
+a, a:hover, a:active, a:focus {
+	text-decoration: none;
+}
+
+a {
+	-webkit-transition: color .3s ease-in-out;
+	-o-transition: color .3s ease-in-out;
+	transition: color .3s ease-in-out;
+}
+
+.link-default {
+	color: #f89d31;
+}
+
+body {
+	font-family: "Noto Sans", sans-serif;
+	font-size: 14px;
+}
+
+/* Main Navigation */
+#main-navigation .navbar {
+	background: white;
+	border: none;
+	box-shadow: 0 1px 1px rgba( 0, 0, 0, .2 );
+	border-radius: 0;
+	margin: 0;
+}
+
+#main-navigation .navbar-nav a {
+	color: black;
+}
+
+#main-navigation .navbar-nav a:hover {
+	color: #f89d31;
+}
+
+/* Daily Player */
+#daily-player {
+	height: 500px;
+	background: url( 'images/daily-player-bg.jpg' ) no-repeat center center;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	text-align: center;
+	padding-top: 40px;
+}
+
+/* Search */
+.search {
+	position: relative;
+	width: 50%;
+	margin: 0 auto;
+}
+
+.search input, .search button {
+	border: none;	
+	outline: none;
+}
+
+.search input {
+	padding: 10px 20px 10px 55px;
+	width: 100%;
+	line-height: 30px;
+	border-radius: 3px;
+	font-weight: 700;
+}
+
+.search button {
+	background: none;
+	position: absolute;
+	top: 12px;
+	left: 10px;
+}
+
+.search button i {
+	display: block;
+	font-size: 28px;
+	transform: rotate(85deg);
+	-webkit-transform: rotate(85deg);
+	-moz-transform: rotate(85deg);
+}
+
+/* Radio Player */
+.radio-player {
+	background: #2a2a2a;
+	width: 855px;
+	margin: 40px auto;
+	color: white;
+	height: 310px;
+}
+
+.radio-player .date, .radio-player .playlist {
+	height: 100%;
+	float: left;
+	padding: 22px;
+}
+
+/* Radio player > Date */
+.radio-player .date {
+	width: 175px;
+	background: #3d3d3d;
+	position: relative;
+}
+
+.radio-player .date-inner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+	-webkit-transform: translate( -50%, -50% );
+	-moz-transform: translate( -50%, -50% );
+}
+
+.radio-player .date span {
+	display: block;
+	text-align: center;
+	margin: 7px 0;
+}
+
+.radio-player .date .week-day {
+	font-weight: 700;
+}
+
+.radio-player .date .day {
+	font-size: 100px;
+	font-weight: 700;
+	border-bottom: 1px solid #5b5b5b;
+	margin-bottom: 10px;
+	padding-bottom: 7px;
+	line-height: 90px;
+}
+
+/* End Radio player > Date */
+
+/* Radio player > radio playlist */
+.radio-player .playlist {
+	width: 680px;
+}
+
+.radio-player .playlist {
+	text-align: left;
+}
+
+.current-program {
+	border-bottom: 1px solid #454545;
+	padding-bottom: 10px;
+}
+
+.current-program .title {
+	font-size: 20px;
+	line-height: 25px;
+	margin-bottom: 10px;
+}
+.category {
+	font-size: 13px;
+	display: block;
+	margin-top: 8px;
+	margin-left: 29px;
+}
+
+.category a:hover {
+	color: white;
+}
+
+.control audio {
+	display: none;
+}
+
+.control .mejs-container {
+	outline: none;
+}
+
+.control .mejs-container a, .control .mejs-container span {
+	font-family: "Noto Sans", sans-serif;
+}
+
+.control .mejs-container .mejs-controls, .control .mejs-container {
+	background: none !important;
+}
+
+.control .mejs-container .mejs-controls {
+	height: 40px;
+}
+
+.control .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
+.control .mejs-controls .mejs-time-rail .mejs-time-current {
+	background: #f89d31;
+	border-radius: 0;
+}
+
+.control .mejs-controls .mejs-time-rail .mejs-time-total,
+.control .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total {
+	background: #444444;
+	border-radius: 0;
+	outline: none;
+}
+
+.control .mejs-playlist,
+.control .mejs-playlist li:nth-child(2n+1) {
+	background: none;
+}
+
+.control .mejs-playlist {
+	height: auto !important;
+	max-height: 241px !important;
+	border: 1px solid #444444;
+}
+
+.control .mejs-playlist li {
+	border-bottom: 1px solid #444444;
+	color: white;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	font-family: "Noto Sans", sans-serif;
+}
+
+.control .mejs-playlist .current {
+	background: #f89d31 !important;
+}
+
+.control .mejs-playlist .current a {
+	color: black;
+}
+
+.control .mejs-playlist li:last-child {
+	border-bottom: 0;
+}
+/* End radio player > radio playlist */
+#content {
+	margin-top: 50px;
+	padding-bottom: 50px;
+}
+
+/* Radio block */
+.radio-block-inner {
+	border: 1px solid #e1e1e1;
+}
+
+.radio-block-inner .block-header {
+	background: #f89d31;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+}
+
+.radio-block-inner .block-header i {
+	position: relative;
+	top: 1px;
+	margin-right: 5px;
+	color: white;
+}
+
+.radio-block-inner .block-header h1 {
+	color: black;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+/* End Radio block */
+
+/* Radio category */
+.radio-category-list {
+	padding: 15px;
+}
+
+.radio-category-list ul {
+	max-height: 623px;
+	overflow-y: scroll;
+}
+
+.radio-category-list li {
+	border-bottom: 1px solid #e1e1e1;
+	padding-bottom: 15px;
+}
+
+.radio-category-list li:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.radio-category-list .media-heading {
+	margin-bottom: 5px;
+}
+
+.radio-category-list .media-heading a {
+	color: black;
+	font-size: 17px;
+}
+
+.radio-category-list .media-heading a:hover {
+	color: #f89d31;
+}
+
+.radio-category-list .media-desc {
+	line-height: 21px;
+}
+/* End Radio category */
+
+/* Radio schedule */
+.radio-schedule-list table {
+	width: 100%;
+}
+
+.radio-schedule-list table .schedule-day {
+	font-family: "Open Sans Condensed", sans-serif;
+	border-right: 1px solid #e1e1e1;
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+.radio-schedule-list table td,
+.radio-schedule-list table th {
+	border-bottom: 1px solid #e1e1e1;
+	padding: 15px;
+}
+
+.radio-schedule-list table tr:last-child td,
+.radio-schedule-list table tr:last-child th {
+	border-bottom: 0;
+}
+
+.radio-schedule-list table .schedule-category-list li a {
+	color: #f89d31;
+	line-height: 23px;
+}
+
+.radio-schedule-list table .schedule-category-list li a:hover {
+	color: black;
+}
+/* End Raido schedule */
+
+#bible-plan {
+	background: #1a1a1a;
+	padding: 50px 0;
+	box-shadow: 0 1px 1px rgba(0,0,0,.5);
+}
+
+#bible-plan .title {
+	text-align: center;
+	color: white;
+	font-size: 20px;
+	text-transform: uppercase;
+	width: 299px;
+	margin: 10px auto 40px;
+}
+
+/* Select month */
+.select-month, #bible-plan .title h1 {
+	float: left;
+}
+
+.select-month {
+	font-family: "Open Sans Condensed", sans-serif;
+	border: 2px solid #f89d31;
+	display: inline-block;
+	text-align: left;
+	position: relative;
+	top: -8px;
+	left: 10px;
+	padding: 4px 8px;
+}
+
+.select-month .current-month {
+	cursor: pointer;
+}
+
+.select-month .list-month {
+	position: absolute;
+	top: 32px;
+	left: 0px;
+	background: #1a1a1a;
+	width: 100%;
+	display: none;
+	padding: 4px 0;
+}
+
+
+.select-month .list-month a {
+	color: white;
+	font-size: 17px;
+	line-height: 25px;
+	padding: 2px 8px;
+	display: block;
+}
+
+.select-month .list-month a:hover,
+.select-month .list-month .current a {
+	background: #f89d31;
+}
+
+.select-month .toggle-list-month {
+	position: relative;
+	top: 2px;
+}
+
+/* End Select month */
+
+#bible-plan .bible-plan-day {
+	background: white;
+	width: 14.2857142857%;
+	float: left;
+	border-right: 1px solid #efefef;
+}
+
+#bible-plan .bible-plan-day .day-title {
+	text-align: center;
+	display: block;
+	font-weight: 700;
+	background: #f5f5f5;
+	padding: 5px 0;
+}
+
+#bible-plan .bible-plan-day .day-title .number {
+	background: #0fade8;
+	color: white;
+	border-radius: 50px;
+	padding: 1px 4px;
+	font-size: 14px;
+	display: block;
+	width: 27px;
+	height: 27px;
+	line-height: 25px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+#bible-plan .bible-plan-day.current .number {
+	background: #f89d31;
+}
+
+#bible-plan .bible-plan-day.current {
+	box-shadow: 0 0 17px rgba(0, 0, 0, 0.2);
+	position: relative;
+	z-index: 1;
+	transform: scale(1.06);
+}
+
+#bible-plan .bible-plan-day.current ul li {
+	font-weight: 700;
+}
+
+#bible-plan .bible-plan-day ul {
+	padding: 10px 0;
+}
+
+#bible-plan .bible-plan-day ul li {
+	/*border-bottom: 1px solid #efefef;*/
+	padding: 8px 10px;
+	line-height: 19px;
+}
+
+#bible-plan .bible-plan-day ul li:last-child {
+	border-bottom: 0;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+/* Footer */
+footer {
+	padding: 40px 0 20px 0;
+}
+
+.footer-list h4 {
+	color: #f89d31;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+.footer-list ul li a {
+	color: #929292;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.footer-list ul li a:hover {
+	color: black;
+}
+
+.footer-list ul li:nth-child(5n) {
+	margin-bottom: 20px;
+}
+
+.footer-list-block {
+	margin-bottom: 25px;
+}
+
+.copyright {
+	text-align: center;
+	font-size: 13px;
+}
+
+.copyright .inner {
+	border-top: 1px solid #efefef;
+	padding-top: 15px;
+}
+
+.copyright p {
+	line-height: 20px;
+}
+
+.fm-schedule .inner {
+	background: #f5f5f5;
+	padding: 20px;
+}
+
+.fm-schedule p {
+	line-height: 20px;
+	border-bottom: 1px dashed #f89d31;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+}
+
+.fm-schedule ul li {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e1e1e1;
+}
+
+.fm-schedule ul li strong {
+	display: block;
+	margin-bottom: 5px;
+	color: #f89d31;
+}
+
+.connect-social {
+	margin-top: 30px;
+}
+
+.connect-social h4 {
+	text-transform: uppercase;
+	margin-bottom: 20px;
+}
+
+.connect-social nav a {
+	background: #3b5998;
+	color: white;
+	padding: 7px 15px;
+	border-radius: 4px;
+	font-weight: 700;
+	margin-right: 5px;
+	margin-bottom: 7px;
+	display: inline-block;
+}
+
+.connect-social nav a i {
+	position: relative;
+	top: 1px;
+	margin-right: 5px;
+}
+
+.connect-social .email {
+	background: #d34836;
+}
