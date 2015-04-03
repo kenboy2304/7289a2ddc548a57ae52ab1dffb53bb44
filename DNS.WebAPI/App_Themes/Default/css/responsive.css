@@ -1,0 +1,161 @@
+@media screen and (max-width: 768px) {
+	/* Search */
+	.search, .radio-player {
+		width: 85%;
+	}
+
+	/*.radio-player {
+		height: auto;
+	}*/
+	.radio-player .date {
+		height: auto;
+	}
+
+	.radio-player .date,
+	.radio-player .playlist {
+		float: none;
+		width: 100%;
+	}
+	
+	#daily-player {
+		height: 535px !important;
+	}
+
+	.radio-player {
+		height: 360px !important;
+	}
+
+	/* Radio player date */
+	.radio-player .date-inner {
+		-moz-transform: none;
+		position: initial;
+		-webkit-transform: none;
+		transform: none;
+	}
+
+	.radio-player .date span {
+		display: inline;
+	}
+
+	.radio-player .date .day {
+		font-size: 14px;
+		line-height: 14px;
+		border: none;
+	}
+
+	.radio-player .date .day:after {
+		content: ','
+	}
+
+	.radio-player .older-date {
+		position: relative;
+		margin-top: 15px;
+	}
+
+	.control .mejs-playlist {
+		max-height: 180px !important;
+	}
+
+	.control .mejs-playlist li {
+		line-height: 18px;	
+	}
+
+	/* Radio category */
+	#radio-category {
+		margin-bottom: 20px;
+	}
+
+	.radio-category-list {
+		padding: 0 15px; 
+	}
+
+	.radio-category-list ul {
+		height: auto;
+		overflow: hidden;
+	}
+
+	.radio-category-list ul li {
+		width: 50%;
+		float: left;
+		margin-top: 0;
+		padding-top: 15px;
+	}
+
+	.radio-category-list ul li:nth-child(2n+1) {
+		clear: both;
+		border-right: 1px solid #e1e1e1;
+	}
+
+	.radio-category-list ul li:nth-child(2n) {
+		padding-left: 15px;
+	}
+
+	.radio-category-list ul li .media-desc {
+		display: none;
+	}
+
+	/* Bible Plan */
+	.bible-plan-week {
+		border-bottom: 1px solid #dfdfdf;
+	}
+
+	.bible-plan-week:last-child {
+		border-bottom: none;
+	}
+
+	#bible-plan .bible-plan-day {
+		height: auto !important;
+	}
+
+	#bible-plan .bible-plan-day.current {
+		position: initial;
+		transform: none;
+	}
+
+	#bible-plan .bible-plan-day .day-title {
+		cursor: pointer;
+	}
+
+	#bible-plan .bible-plan-day .day-title.active {
+		background: #f89d31;
+	}
+
+	#bible-plan .bible-plan-day ul {
+		display: none;
+	}	
+
+	#bible-plan .bible-plan-day ul.mobile {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		background: white;
+		box-shadow: 0 0 6px rgba(0,0,0,.3);
+		z-index: 10;
+		padding: 15px 25px;
+	}
+
+	#bible-plan .bible-plan-day ul .close-plan {
+		position: absolute;
+		top: 14px;
+		right: 20px;
+		font-family: inherit;
+		font-weight: 700;
+		color: #EA2828;
+		cursor: pointer;
+	}
+
+	#bible-plan .bible-plan-day ul .close-plan i {
+		position: relative;
+		top: 4px;
+		font-size: 20px;
+		line-height: 5px;
+	}
+
+	.bible-plan-month {
+		position: relative;
+		height: auto;
+		overflow: visible;
+	}
+
+	
+}

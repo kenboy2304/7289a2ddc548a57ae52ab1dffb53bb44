@@ -1,0 +1,50 @@
+﻿@using PagedList.Mvc
+@model DNS.WebAPI.Models.CatalogModel
+@{
+    ViewBag.Title = Model.Catalog.Name;
+}
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="primary col-md-9">
+                
+                <div class="inner">
+                    <div class="entry">
+                        <div class="entry-title">
+                            <h1>
+
+                                @Model.Catalog.Name
+                            </h1><!-- end .entry-title -->
+                        </div>
+                    </div><!-- end .entry -->
+                </div>
+                <div class="inner category-page">
+                    <div class="entry">
+                        @foreach (var article in Model.Articles)
+                        {
+                            <div class="entry-title">
+                                <h1>
+                                    <a href="@Url.Action("Index","Article", new {catalog=Model.Catalog.UrlKeyWord,name = article.UrlKeyword})">@article.Name</a>
+                                </h1><!-- end .entry-title -->
+
+                                <nav class="meta">
+                                    <span class="meta-day"><i class="icon-calendar"></i>@article.PublishedDate.ToString("dddd, d/M/yyyy")</span>
+                                </nav>
+                            </div>
+                        }
+                    </div>
+                    <!-- end .entry -->
+
+                    @Html.PagedListPager(Model.Articles, page => Url.Action("Index", new {page}))
+
+                    <div class="entry-socials">
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_native_toolbox"></div>
+                    </div>
+                </div>
+            </div><!-- end .primary -->
+
+            @Html.Action("ArticleNewest","Module")
+        </div>
+    </div>
+</div>

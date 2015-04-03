@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DNS.WebAPI.Models.Article>
+<div class="sidebar col-md-3">
+    <div class="inner">
+        <aside class="widget">
+            <div class="widget-header">
+                <h1>Bài Mới</h1>
+            </div><!-- end .widget-header-->
+
+            <div class="widget-content">
+                <ul class="aside-posts">
+                    @foreach (var item in Model)
+                    {
+                        var catalog = item.Catalogs.First();
+                        <li>
+                            <h2 class="aside-title"><a href="@Url.Action("Index","Article", new {catalog = catalog.UrlKeyWord, name = item.UrlKeyword})">@item.Name</a></h2>
+                            <span class="aside-desc">@item.PublishedDate.ToString("dddd, d/M/yyyy")<br /> Loạt Bài: <a href="@Url.Action("Index","Catalog",new {name = catalog.UrlKeyWord})">@catalog.Name</a></span>
+                        </li>
+                    }
+                </ul>
+            </div><!-- end .widget-content -->
+        </aside><!-- end .widget -->
+
+        <aside class="widget">
+            <div class="widget-header">
+                <h1>Facebook</h1>
+            </div><!-- end .widget-header -->
+
+            <div class="widget-content">
+                <div class="fb-like-box" data-href="https://www.facebook.com/dainguonsong" data-width="263" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+            </div>
+        </aside>
+    </div>
+</div><!-- end .sidebar -->

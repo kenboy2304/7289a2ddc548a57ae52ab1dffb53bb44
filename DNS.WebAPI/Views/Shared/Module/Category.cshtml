@@ -1,0 +1,38 @@
+﻿@model DNS.WebAPI.Models.Enity.Settings.BroadcastCatalog
+@{
+    var catalogs = (List<DNS.WebAPI.Models.Catalog>)ViewBag.Catalogs;
+}
+
+<div id="radio-category" class="col-md-7 col-sm-7 radio-block">
+    <div class="radio-block-inner">
+        <div class="block-header">
+            <h1><i class="icon-list"></i>Chuyên Mục Phát Thanh</h1>
+        </div>
+
+        <div class="radio-category-list">
+            <ul class="media-list">
+                @if (!string.IsNullOrEmpty(Model.CatalogList))
+                {
+                    foreach (var catalogId in Model.CatalogList.Split(','))
+                    {
+                        var id = Int32.Parse(catalogId);
+                        var catalog = catalogs.Single(c => c.Id == id);
+
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="@Url.Content("~/App_themes/Default/images/1.jpg")" alt="@catalog.Name">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a href="#">@catalog.Name</a></h4>
+                                <p class="media-desc">@catalog.Desc</p>
+                            </div>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </div><!-- end .radio-block-list -->
+    </div><!-- end .radio-block-inner -->
+</div><!-- end #radio-category -->

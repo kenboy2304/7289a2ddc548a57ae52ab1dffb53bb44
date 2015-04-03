@@ -1,0 +1,55 @@
+﻿@model DNS.WebAPI.Models.ArticleDetailModel
+@{
+    ViewBag.Title = Model.Article.Name;
+}
+
+
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="primary col-md-9">
+                <div class="inner">
+                    <div class="entry">
+                        <div class="entry-title">
+                            <h1>
+                                @*Cầu Nguyện - Bài 6 - Bài Cầu Nguyện Chúa Dạy - Ma-thi-ơ 6:9-15 - Tha Thứ*@
+                                @Model.Article.Name
+                            </h1><!-- end .entry-title -->
+
+                            <nav class="meta">
+                                <span class="meta-day"><i class="icon-calendar"></i>@Model.Article.PublishedDate.ToString("dddd, d/M/yyyy")</span>
+                                <span class="meta-category"><i class="icon-archive"></i><strong>Loạt bài: </strong><a href="@Url.Action("Index","Catalog", new {name = @Model.Catalog.UrlKeyWord})">@Model.Catalog.Name</a></span>
+                            </nav>
+                        </div>
+                    </div><!-- end .entry -->
+                    
+                    <div class="entry-player">
+                        <div class="control">
+                            <audio id="page-audio" type="audio/mp3" width="100%" autoplay controls>
+                                <source src="@Model.Article.Mp3Url" title="@Model.Article.Name" data-category="@Model.Catalog.Name" data-category-link="@Url.Action("Index", "Catalog", new { name = Model.Catalog.UrlKeyWord })" />
+                            </audio>
+                        </div>
+                    </div><!-- end .entry-player -->
+
+                    <div class="entry-related">
+                        <h4>Cùng chủ đề</h4>
+
+                        <ul>
+                            @foreach (var article in Model.ReleatedArticles)
+                            {
+                                <li><a style="@(article.Id == Model.Article.Id ? "color: #f89d31" : "")" href="@Url.Action("Index","Article", new {name = article.UrlKeyword})"> @article.Name</a></li>
+                            }
+                        </ul>
+                    </div><!-- end .entry-related -->
+
+                    <div class="entry-socials">
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_native_toolbox"></div>
+                    </div>
+                </div>
+            </div><!-- end .primary -->
+
+            @Html.Action("ArticleNewest","Module")
+        </div>
+    </div>
+</div>

@@ -25,6 +25,30 @@ namespace IdentitySample
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            //Plugin Tokenize
+            bundles.Add(new StyleBundle("~/Areas/DNSAdmin/Content/Plugin/Tokenize").Include(
+                      "~/Areas/DNSAdmin/Content/Plugin/Tokenize/jquery.tokenize.css"));
+            bundles.Add(new ScriptBundle("~/Plugin/Tokenize").Include(
+                      "~/Areas/DNSAdmin/Content/Plugin/Tokenize/jquery.tokenize.js"));
+
+            //ADMIN
+            //css
+            bundles.Add(new StyleBundle("~/SbAdmin/css").Include(
+                      "~/App_Themes/SbAdmin/bower_components/bootstrap/dist/css/bootstrap.min.css",
+                      "~/App_Themes/SbAdmin/bower_components/metisMenu/dist/metisMenu.min.css",
+                      "~/App_Themes/SbAdmin/dist/css/sb-admin-2.css",
+                      "~/App_Themes/SbAdmin/bower_components/font-awesome/css/font-awesome.css"));
+            //js
+            bundles.Add(new ScriptBundle("~/SbAdmin/js").Include(
+                      "~/App_Themes/SbAdmin/bower_components/jquery/dist/jquery.min.js",
+                      "~/App_Themes/SbAdmin/bower_components/bootstrap/dist/js/bootstrap.min.js",
+                      "~/App_Themes/SbAdmin/bower_components/metisMenu/dist/metisMenu.min.js",
+                      "~/App_Themes/SbAdmin/dist/js/sb-admin-2.js"));
+
+            //Datetime Template
+            //css
+
         }
     }
 }

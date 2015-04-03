@@ -1,0 +1,61 @@
+﻿@model List<DNS.WebAPI.Models.Enity.Settings.BroadcastSchedule>
+@{
+    ViewBag.Title = "Lịch phát thanh";
+    var catalogs = (List<DNS.WebAPI.Models.Catalog>)ViewBag.Catalogs;
+
+}
+
+@using (Html.BeginForm("BroadcastUpdate", "Settings", FormMethod.Post))
+{
+    <table class="table table-bordered table-striped">
+        @*<thead>
+            <tr>
+                <th class="col-lg-2">
+                    Ngày
+                </th>
+                <th>
+                    Lịch phát thanh
+                </th>
+            </tr>
+        </thead>*@
+        <tbody>
+            @for (var i = 0; i<Model.Count();i++)
+            {
+                <tr>
+                    <td style="text-align: center">
+                        <h2>@Html.DisplayFor(modelItem => Model[i].Day)</h2>
+                    </td>
+                    <td>
+
+                        @if (catalogs != null && catalogs.Any())
+                        {
+                            var selectList = new MultiSelectList(catalogs, "Id", "Name", Model[i].Broadcast);
+                            @*@Html.DropDownList("broadcast", selectList, new { multiple = "multiple", @class = "tokenize" })*@
+                            @Html.DropDownListFor(itemModel => Model[i].Broadcast, selectList, null, new { multiple = "multiple", @class = "tokenize" })
+                        }
+                        @Html.HiddenFor(itemModel => Model[i].Id)
+                        
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="col-lg-offset-2 col-lg-10"><button type="submit" class="btn btn-primary">Update</button></div>
+}
+
+@section styles
+{
+    @Styles.Render("~/Areas/DNSAdmin/Content/Plugin/Tokenize")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/Plugin/Tokenize")
+    <script>
+        $(document).ready(function () {
+            $('.tokenize').tokenize();
+            $('.tokenize').css({ "width": "100%" });
+        });
+    </script>
+}

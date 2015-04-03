@@ -1,4 +1,6 @@
-﻿using IdentitySample.Models;
+﻿using DNS.WebAPI;
+using DNS.WebAPI.Models.Enity;
+using IdentitySample.Models;
 using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -16,6 +18,8 @@ namespace IdentitySample
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ViewEngines.Engines.Add( new ModuleViewEngine());
+            Database.SetInitializer<DNSContext>(new DatabaseContextInitializer());
         }
     }
 }

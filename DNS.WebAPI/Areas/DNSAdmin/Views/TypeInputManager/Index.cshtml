@@ -1,0 +1,67 @@
+﻿@model IEnumerable<DNS.WebAPI.Models.Enity.TypeInput>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManagerTemplate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisplayTemplate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    using (Html.BeginForm("Edit", "TypeInputManager", FormMethod.Post))
+    {
+        <tr>
+            <td>
+                @Html.AntiForgeryToken()
+                @Html.Hidden("Id", item.Id)
+                @Html.TextBox("Name", item.Name)
+            </td>
+            <td>
+                @Html.TextArea("ManagerTemplate", item.ManagerTemplate, new { @class = "form-control" })
+            </td>
+            <td>
+                @Html.TextArea("DisplayTemplate", item.DisplayTemplate, new { @class = "form-control" })
+            </td>
+            <td>
+                <button type="submit" class="btn btn-primary btn-sm">Cập nhật</button>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class="btn btn-danger btn-sm"})
+            </td>
+        </tr>
+    }
+}
+    @using (Html.BeginForm("Create", "TypeInputManager", FormMethod.Post))
+    {
+        <tr>
+            <td>
+                @Html.AntiForgeryToken()
+                @Html.TextBox("Name", null, new { @class = "form-control" })
+            </td>
+            <td>
+                @Html.TextArea("ManagerTemplate", new {@class="form-control"})
+            </td>
+            <td>
+                @Html.TextArea("DisplayTemplate",new {@class="form-control"})
+            </td>
+            <td>
+                <button type="submit" class="btn btn-primary btn-sm">Thêm</button>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,35 @@
+﻿@model DNS.WebAPI.Models.Article
+@{
+    ViewBag.Title = Model.Title;
+}
+
+
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="primary col-md-9">
+                <div class="inner">
+                    @*<figure class="header-image">
+                        <img src="images/gioi-thieu-dns.jpg" alt="#">
+                    </figure>*@<!-- end .entry-image -->
+
+                    <div class="entry">
+                        <div class="entry-title">
+                            <h1>@Model.Name</h1>
+                    </div><!-- end .entry-title -->
+
+                    <div class="entry-content">
+                        @Html.Raw(Model.Content)
+                    </div><!-- end .entry -->
+
+                    <div class="entry-socials">
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_native_toolbox"></div>
+                    </div>
+                </div>
+            </div><!-- end .primary -->
+        </div>
+        @Html.Action("ArticleNewest", "Module")
+    </div>
+</div>
+</div>

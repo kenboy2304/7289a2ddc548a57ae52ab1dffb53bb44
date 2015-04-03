@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DNS.WebAPI.Models.Enity.Settings.FrequencySchedule>
+
+@{
+    ViewBag.Title = "Tầng số phát thanh";
+}
+
+<p>
+    @Html.ActionLink("Create New", "FrequencyCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Publish)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Language)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Desc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publish)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Language)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "FrequencyEdit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "FrequencyDetail", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "FrequencyDelete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

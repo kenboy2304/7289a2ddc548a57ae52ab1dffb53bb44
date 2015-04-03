@@ -1,0 +1,16 @@
+﻿@model IEnumerable<DNS.WebAPI.Models.Enity.Settings.FrequencySchedule>
+<div class="footer-block-list">
+    <p>
+        Xin quý thính giả phồ biến chương trình phát thanh của Đài Nguồn Sống trên sóng ngắn radio tại Việt Nam cho những thân tín hữu không có điều kiện truy cập Internet theo thời khóa biểu như sau.
+    </p>
+
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <strong>@item.Language</strong>
+                @item.Desc
+            </li>
+        }
+    </ul>
+</div>

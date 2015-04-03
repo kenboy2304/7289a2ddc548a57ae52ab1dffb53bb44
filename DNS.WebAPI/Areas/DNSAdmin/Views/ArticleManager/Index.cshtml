@@ -1,0 +1,90 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DNS.WebAPI.Models.Article>
+
+@{
+    ViewBag.Title = "Quản lý bài viết";
+    var i = 1;
+}
+
+<p>
+    <a href="@Url.Action("Create")" class=" btn btn-primary btn-sm">Tạo bài viết</a>
+</p>
+<table class="table table-hover">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => Model[0].Publish)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model[0].Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model[0].Catalogs)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => Model[0].PublishedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model[0].Order)
+        </th>
+        <th class="col-lg-2"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="@(item.Mp3Error ? "bg-danger":"" )">
+            <td>
+                @i |
+                 @item.Mp3Error
+                @{ i++;}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publish)
+            </td>
+            <td>
+                <b>@Html.DisplayFor(modelItem => item.Name)</b>
+            </td>
+            <td>
+                @if (item.Catalogs != null && item.Catalogs.Any())
+                {
+                    foreach (var catalog in item.Catalogs)
+                    {
+                        <p>@catalog.Name</p>
+                    }
+                }
+            </td>
+            <td>
+                @item.PublishedDate.ToString("d/M/yyyy HH:ss")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-sm btn-primary btn-circle"><i class="fa fa-edit"></i></a>
+                <form action="@Url.Action("Delete", new{id = item.Id})" method="POST" data-name="@item.Name" class="btn">
+                    @Html.AntiForgeryToken()
+                    <button class="btn btn-sm btn-danger btn-del btn-circle"><i class="fa fa-remove"></i></button>
+                </form>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("form").on("submit", function () {
+                if (!$(this).hasClass("search")) {
+                    var check = confirm("Bạn chắc chắn muốn xóa '" + $(this).data("name") + "'?");
+                    return check;
+                }
+                
+            });
+        });
+    </script>
+}

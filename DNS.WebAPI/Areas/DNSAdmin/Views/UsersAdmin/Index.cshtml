@@ -1,0 +1,57 @@
+﻿@using IdentitySample.Models
+@using Microsoft.AspNet.Identity
+@model IEnumerable<IdentitySample.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+    var roles = (List<ApplicationRole>)ViewBag.Roles;
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        @*Add a table header for the Address info:*@
+        <th>
+            @Html.DisplayNameFor(model => model.DisplayAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Roles)
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+                
+            </td>
+            <td>
+                @foreach (var r in item.Roles)
+                {
+                    var role = roles.Single(rl => rl.Id == r.RoleId);
+                    <p>@role.Name</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayAddress)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

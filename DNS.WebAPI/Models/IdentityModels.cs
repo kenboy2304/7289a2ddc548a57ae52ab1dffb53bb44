@@ -17,7 +17,6 @@ namespace IdentitySample.Models
             // Add custom user claims here
             return userIdentity;
         }
-
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }

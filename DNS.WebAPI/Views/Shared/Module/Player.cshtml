@@ -1,0 +1,46 @@
+﻿@using DNS.WebAPI.Models
+@model IEnumerable<DNS.WebAPI.Models.Article>
+<!-- Daily Player -->
+<div id="daily-player" style="">
+    <div class="search">
+        <form action="#">
+            <input type="text" placeholder="Tìm bài giảng">
+            <button><i class="icon-search"></i></button>
+        </form>
+    </div><!-- end .search -->
+
+    <div class="radio-player">
+        <div class="date">
+            <div class="date-inner">
+                <span class="week-day"> @{
+                                             var a = DateTime.Today.ToString("dddd");
+                                             @a            
+                                                                        }</span>
+                <span class="day">@DateTime.Today.ToString("MM")</span>
+                <span class="month">@DateTime.Today.ToString("MMMM")</span>
+                <span class="year">Năm @DateTime.Today.ToString("yyyy")</span>
+            </div>
+            <div class="older-date">
+                <a href="@Url.Action("Daily","Article", new {date=DateTime.Today.AddDays(-1).ToString("d-M-yyyy")})"><i class="icon-arrow-left4"></i>@DateTime.Today.AddDays(-1).ToString("dddd, d/M/yyyy")</a>
+            </div><!-- end .older-date -->
+        </div>
+
+        <div class="playlist">
+            <div class="control">
+                <audio id="home-audio" type="audio/mp3" width="100%" autoplay controls>
+                    @foreach (var item in Model)
+                    {
+
+
+                        var catalog = item.Catalogs == null ? null : item.Catalogs.FirstOrDefault();
+                        catalog = catalog ?? new Catalog();
+
+                        <source src="@item.Mp3Url" title="@item.Name" data-category="@catalog.Name" data-category-link="@catalog.UrlKeyWord" />
+                    }
+                    
+                </audio>
+            </div>
+        </div>
+    </div><!-- end .radio-player -->
+</div><!-- end #daily-player -->
+<!-- /Daily Player -->

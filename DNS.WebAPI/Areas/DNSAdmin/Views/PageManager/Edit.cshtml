@@ -1,0 +1,15 @@
+﻿@model DNS.WebAPI.Models.Article
+
+@{
+    ViewBag.Title = "Sửa trang";
+    Layout = "~/Areas/DNSAdmin/Views/Shared/_Layout_sb_admin_editor.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.EditorForModel(Model)
+}
+
+
+

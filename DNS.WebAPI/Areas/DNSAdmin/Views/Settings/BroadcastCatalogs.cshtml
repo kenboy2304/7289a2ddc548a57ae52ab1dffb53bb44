@@ -1,0 +1,55 @@
+﻿@model DNS.WebAPI.Models.Enity.Settings.BroadcastCatalog
+
+@{
+    ViewBag.Title = "Chuyên mục phát thanh";
+    var catalogs = (List<DNS.WebAPI.Models.Catalog>)ViewBag.Catalogs;
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @if (catalogs != null && catalogs.Any())
+                {
+                    var selected = string.IsNullOrEmpty(Model.CatalogList) ? null : Model.CatalogList.IndexOf(',') == -1 ? new[] { Model.CatalogList } : Model.CatalogList.Split(',');
+                    var selectList = new MultiSelectList(catalogs, "Id", "Name", selected);
+                    @Html.DropDownList("cats", selectList, new { multiple = "multiple", @class = "tokenize" })
+                }
+                @*@Html.EditorFor(model => model.CatalogList, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CatalogList, "", new { @class = "text-danger" })*@
+    
+    
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@section styles
+{
+    @Styles.Render("~/Areas/DNSAdmin/Content/Plugin/Tokenize")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Plugin/Tokenize")
+    <script>
+        $(document).ready(function () {
+            $('.tokenize').tokenize();
+            $('.tokenize').css({ "width": "100%" });
+        });
+    </script>
+}

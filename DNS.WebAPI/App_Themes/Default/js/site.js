@@ -9,6 +9,13 @@ $( document ).ready( function (){
         keyActions: []
 	});
 
+	$( '.control audio' ).mediaelementplayer({
+		loop: true,
+        shuffle: false,
+        audioHeight: 30, 
+        keyActions: []
+	});
+
 	/* Remove show/hide toggle button and time loaded */
 	$( '.mejs-hide-playlist, .mejs-time-loaded' ).remove();
 	
@@ -47,4 +54,26 @@ $( document ).ready( function (){
 			$( '.list-month' ).hide();
 		}
 	});
+
+	/* Bible Plan on mobile device */
+	if( $(window).width() <= 768 ) {
+		$( '#bible-plan .bible-plan-day .day-title' ).on( 'click', function() {
+			$( '#bible-plan .bible-plan-day ul' ).hide();
+
+			$( '#bible-plan .bible-plan-day .day-title' ).removeClass( 'active' );
+			$( this ).addClass('active');
+
+			$( this ).next( 'ul' )
+				.addClass('mobile')
+				.show()
+				.append('<span class="close-plan"><i class="icon-cross"></i> close</span>')
+		});
+
+		$( '#bible-plan .bible-plan-day' ).delegate( '.close-plan', 'click', function() {
+			$( this ).parent( 'ul' ).hide();
+			$( this ).parent( 'ul' ).prev('.day-title').removeClass('active');
+		});
+	}
+
+	
 });

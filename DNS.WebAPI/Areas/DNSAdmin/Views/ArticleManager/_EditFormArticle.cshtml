@@ -1,0 +1,95 @@
+﻿@using DNS.WebAPI.Areas.DNSAdmin.Models
+@using DNS.WebAPI.Models
+@model DNS.WebAPI.Models.Article
+
+<div class="col-lg-8">
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model=> model.Publish)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ThumbailUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ThumbailUrl, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ThumbailUrl, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Mp3Url, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Mp3Url, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Mp3Url, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Brief, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Brief, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Brief, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-4">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Danh mục
+        </div>
+        <div class="panel-body">
+            
+            <div class="form-group">
+                    @helper DisplayCatalogs(List<SelectListCatalogModels> catalogs, List<Catalog> selected)
+{
+                    <ul class="list-unstyled list-catalogs">
+                        @foreach (SelectListCatalogModels catalog in catalogs)
+                        {
+                            var check = (selected != null && selected.Any(c => c.Id == catalog.Id));
+                            <li class="@(check ? "selected":"")">
+                                @for (var j = 0; j < (int)catalog.Level; j++)
+                                {
+                                    <span style="display: inline-block; width: 30px"></span>
+                                }
+                                <input type="checkbox" name="catalogIds" value="@catalog.Id" @(check ? "checked=\"checked\"" : "") @(catalog.Disable ? "disabled" : "") />
+                                
+                                @if (catalog.Disable)
+                                {
+                                    <span style="text-decoration: line-through">@catalog.Name</span>
+                                }
+                                else
+                                {
+  
+                                    @catalog.Name
+                                }
+                            </li>
+                        }
+                    </ul>
+}
+                    @DisplayCatalogs((List<SelectListCatalogModels>)ViewBag.Catalogs, Model.Catalogs)
+            </div>
+        </div>
+    </div>
+</div>
+
+

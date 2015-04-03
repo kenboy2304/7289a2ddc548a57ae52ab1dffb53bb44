@@ -1,0 +1,80 @@
+﻿@using DNS.WebAPI.Models
+@model IEnumerable<Catalog>
+
+@{
+    ViewBag.Title = "Quản lý danh mục";
+}
+
+@helper ShowCatalogs(IEnumerable<Catalog> catalogs, int level)
+{
+    foreach (var item in catalogs)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publish)
+            </td>
+            <td>
+                @for (var i = 0; i < level; i++)
+                {
+                    <span style="display: inline-block; width: 20px"></span>
+                }
+                <i class="fa fa-caret-right"></i>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrlKeyWord)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShowInMainMenu)
+            </td>
+            
+            <td>
+                @item.DateCreated.ToString("d-M-yyyy h:m")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit",new { id=item.Id } )" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                <a href="@Url.Action("Edit",new { id=item.Id } )" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
+            </td>
+        </tr>
+
+        if (item.CatalogChildrens == null || !item.CatalogChildrens.Any())
+        {
+            continue;
+        }
+        @ShowCatalogs(item.CatalogChildrens, level+1)
+    }
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-hover table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Publish)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UrlKeyWord)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowInMainMenu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order)
+        </th>
+        <th></th>
+    </tr>
+
+    @ShowCatalogs(Model, 0)
+
+
+</table>

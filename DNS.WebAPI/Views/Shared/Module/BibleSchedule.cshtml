@@ -1,0 +1,55 @@
+﻿@using System.Text.RegularExpressions
+@model DNS.WebAPI.Models.StudyBibleMonthly
+<div id="bible-plan">
+    <div class="container">
+        <div class="title clearfix">
+            <h1>Lịch Đọc Kinh Thánh</h1>
+            <div class="select-month">
+                <span class="current-month">Tháng @((int)Model.Month) <span class="toggle-list-month"><i class="icon-arrow-down5"></i></span></span>
+
+                <ul class="list-month">
+                    @for (var i = 1; i <= 12; i++)
+                    {
+                        if ((int)Model.Month == i)
+                        {
+                            <li class="current"><a href="@Url.Action("BibleDaily","Article", new {month = i})" target="_blank">Tháng @i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("BibleDaily","Article", new {month = i})" target="_blank">Tháng @i</a></li>
+                        }
+                    }
+                    
+                </ul>
+            </div>
+        </div>
+
+        <div class="bible-plan-month">
+            <div class="bible-plan-week clearfix">
+                @if (Model.Daily != null)
+                {
+                    foreach (var daily in Model.Daily)
+                     {
+                         <div class="bible-plan-day @(daily.Date == DateTime.Today.Day ? "current" : "")">
+                             <div class="inner">
+                                 <span class="day-title">
+                                     <span class="number">@daily.Date</span>
+                                 </span>
+                                 @{
+                                     var arr = Regex.Split(daily.Content, Environment.NewLine);
+                                 }
+                                 <ul>
+                                     @foreach (var s in arr)
+                                     {
+                                         <li>@s</li>
+                                     }
+                                 </ul>
+                             </div>
+                         </div>
+                         <!-- end .bible-plan-day -->
+                     }
+                }
+            </div><!-- end .bible-plan-week -->
+        </div><!-- end .bible-plan-month -->
+    </div>
+</div><!-- end #bible-plan -->

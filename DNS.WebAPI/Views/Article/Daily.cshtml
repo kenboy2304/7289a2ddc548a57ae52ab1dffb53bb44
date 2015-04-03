@@ -1,0 +1,66 @@
+﻿@using DNS.WebAPI.Models
+@model IEnumerable<DNS.WebAPI.Models.Article>
+
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="primary col-md-9">
+                <div class="inner">
+                    <div class="entry">
+                        <div class="entry-title">
+                            <h1>
+                                @{
+                                    var date = (DateTime) ViewBag.Date;
+                                    @date.ToString("dddd, d/M/yyyy");
+}
+                            </h1><!-- end .entry-title -->
+                        </div>
+
+                        <div class="entry-content page-radio">
+                            <div class="playlist">
+                                <div class="control">
+                                    <audio id="home-audio" type="audio/mp3" width="100%" autoplay controls>
+                                        @foreach (var item in Model)
+                                        {
+                                            var catalog = item.Catalogs == null ? null : item.Catalogs.FirstOrDefault();
+                                            catalog = catalog ?? new Catalog();
+                                            <source src="@item.Mp3Url" title="@item.Name" data-category="@catalog.Name" data-category-link="@catalog.UrlKeyWord" />
+                                        }
+
+                                    </audio>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="">
+                                <span class=""><a href="@Url.Action("Daily", new { date = date.AddDays(-1).ToString("d-M-yyyy") })" class="btn btn-sm btn-default"><i class="icon-arrow-left8"></i> @date.AddDays(-1).ToString("dddd, d/M/yyyy")</a></span>
+                                @if (date.Date < DateTime.Today)
+                                {
+                                    <span class="pull-right"><a href="@Url.Action("Daily", new { date = date.AddDays(1).ToString("d-M-yyyy") })" class="btn btn-sm btn-default">@date.AddDays(1).ToString("dddd, d/M/yyyy") <i class="icon-arrow-right7"></i></a></span>
+                                }
+                                
+                            </div>
+                        </div><!-- end .entry-content -->
+                        <div class="entry-related">
+                            <h4>Ngày cũ hơn</h4>
+
+                            <ul>
+                                @for (var i = 1; i <= 10; i++)
+                                {
+                                    <li><a href="@Url.Action("Daily", "Article", new { date = date.AddDays(-i).ToString("d-M-yyyy") })">Chương trình @date.AddDays(-i).ToString("dddd, d/M/yyyy")</a></li>
+                                }
+                                
+                            </ul>
+                        </div><!-- end .entry-related -->
+                    </div><!-- end .entry -->
+
+                    <div class="entry-socials">
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_native_toolbox"></div>
+                    </div>
+                </div>
+            </div><!-- end .primary -->
+
+            @Html.Action("ArticleNewest","Module")
+        </div>
+    </div>
+</div>

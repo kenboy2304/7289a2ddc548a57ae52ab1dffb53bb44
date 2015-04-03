@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = "_Layout_sb_admin.cshtml";
+}
+
+@RenderBody()
+
+@section styles
+{
+<link href="@Url.Content("~/Areas/DNSAdmin/Content/Plugin/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css")" rel="stylesheet" />
+    @RenderSection("styles", required:false)
+}
+
+@section scripts
+{
+@Scripts.Render("~/bundles/jqueryval")
+<script src="@Url.Content("~/Scripts/moment.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/moment-with-locales.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Areas/DNSAdmin/Content/Plugin/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+        $(function () {
+            $('input[type="datetime"]').datetimepicker({
+                locale: 'vi',
+                format: "D/M/YYYY hh:mm A"
+            });
+            $('.btn-submit').on("click", function (event) {
+                event.preventDefault();
+                if ($(this).hasClass("btn-drag")) {
+                    $("#Publish").val(false);
+                }
+                if ($(this).hasClass("btn-post")) {
+                    $("#Publish").val(true);
+                }
+                $('form').submit();
+                return false;
+            });
+            $('#Name').on("change", function () {
+                $('#Title').val($(this).val());
+            });
+            $('#Brief').on("change", function () {
+                $('#MetaDescription').val($(this).val());
+            });
+        });
+
+</script>
+    @RenderSection("scripts", required: false)
+}

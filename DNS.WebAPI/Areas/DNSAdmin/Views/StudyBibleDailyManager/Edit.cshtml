@@ -1,0 +1,35 @@
+﻿@using DNS.WebAPI.Models
+@model DNS.WebAPI.Models.StudyBibleMonthly
+@{
+    ViewBag.Title = "Sửa Kinh Thánh Hằng Ngày Tháng " + ((int)Model.Month);
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => Model.Id)
+    @Html.HiddenFor(model => Model.Month)
+
+
+    for (var i = 1; i <= DateTime.DaysInMonth(DateTime.Today.Year, ((int)Model.Month)); i++)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    Ngày @i
+                </div>
+                <div class="panel-body">
+                    @Html.Hidden("Daily[" + (i - 1) + "].Date", i)
+
+                    @Html.TextAreaFor(daily => Model.Daily[i - 1].Content, htmlAttributes: new { @class = "form-control", rows = 6 })
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+    }
+
+    <div class="col-lg-12">
+        <button class="btn btn-sm btn-primary">Lưu</button>
+    </div>
+}
+

@@ -1,0 +1,111 @@
+﻿@using System.Text.RegularExpressions
+@using DNS.WebAPI.Models
+@model DNS.WebAPI.Models.StudyBibleMonthly
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+
+            <div class="primary col-md-12">
+                <div class="inner">
+                    <!-- end .entry-image -->
+
+                    <div class="entry">
+                        <div class="entry-title">
+                            <h1>
+                                Lịch đọc Kinh Thánh - Tháng @((int)Model.Month)
+                            </h1><!-- end .entry-title -->
+                        </div>
+                        <div class="entry-content">
+                            
+                            <div class="">
+                                @{
+                                    var prev = (int) Model.Month == 1 ? 12 : (int) Model.Month - 1;
+                                    var next =(int) Model.Month == 12 ? 1 : (int) Model.Month + 1;
+                                    }
+                                <a class="btn btn-sm btn-default" href="@Url.Action("BibleDaily", new{month= prev})"><i class="icon-arrow-left8"></i> Tháng @prev</a>
+                                <a class="btn btn-sm btn-default pull-right" href="@Url.Action("BibleDaily", new{month= next})">Tháng @next <i class="icon-arrow-right7"></i></a>
+                            </div>
+                            <br/>
+                            <table class="plan-table">
+                                <thead style="font-family: arial;">
+                                    <tr>
+                                        @for (var d = 1; d <= 7; d++)
+                                        {
+                                            var date = new DateTime(DateTime.Today.Year, (int)Model.Month, d);
+                                            if (date.DayOfWeek == DayOfWeek.Sunday)
+                                            {
+                                                <th style="color: red">
+                                                    @date.ToString("dddd")
+                                                </th>
+                                            }
+                                            else
+                                            {
+                                                <th>
+                                                    @date.ToString("dddd")
+                                                </th>
+                                            }
+
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @helper ShowItem(List<StudyBibleDaily> list, int month)
+                                    {
+                                        <tr>
+                                            @foreach (var item in list)
+                                            {
+
+                                                <td style="@(DateTime.Today.Month == month && DateTime.Today.Day == item.Date ? "background:#92C500; font-weight:bold" : "")">
+                                                    <strong><i class="icon-calendar"></i>Ngày @item.Date</strong>
+                                                    @{
+                                                        var arr = Regex.Split(item.Content, Environment.NewLine);
+                                                    }
+                                                    <ul>
+                                                        @foreach (var s in arr)
+                                                        {
+                                                            <li>@s</li>
+                                                        }
+                                                    </ul>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+
+                                    @{ var listDate = new List<StudyBibleDaily>();
+                                        var i = 7;
+                                    }
+                                    @foreach (var item in Model.Daily)
+                                    {
+                                        
+                                        if (i == 7)
+                                        {
+                                            if (listDate.Any())
+                                            {
+                                                @ShowItem(listDate, (int)Model.Month)
+                                            }
+                                            listDate = new List<StudyBibleDaily> {item};
+                                            i = 1;
+                                        }
+                                        else
+                                        {
+                                            listDate.Add(item);
+                                            i++;
+                                        }
+                                        
+                                    }
+                                    @ShowItem(listDate, (int)Model.Month)
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- end .entry -->
+
+                    <div class="entry-socials">
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_native_toolbox"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

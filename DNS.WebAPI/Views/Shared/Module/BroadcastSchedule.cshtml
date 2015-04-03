@@ -1,0 +1,42 @@
+﻿@using DNS.WebAPI.Models
+@model IEnumerable<DNS.WebAPI.Models.Enity.Settings.BroadcastSchedule>
+@{
+    List<Catalog> catalogs = ViewBag.Catalogs;
+}
+
+<div id="radio-schedule" class="col-md-5 col-sm-5">
+    <div class="radio-block-inner">
+        <div class="block-header">
+            <h1><i class="icon-calendar"></i>Lịch Trình Phát Thanh</h1>
+        </div>
+
+        <div class="radio-schedule-list">
+            <table>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th class="schedule-day">@Html.DisplayFor(modelItem => item.Day)</th>
+                            <td>
+                                <ul class="schedule-category-list">
+                                
+                                    @if (item.Broadcast != null)
+                                    {
+                                        foreach (var catalogId in item.Broadcast)
+                                        {
+                                            var id = Int32.Parse(catalogId);
+                                            var catalog = catalogs.Single(c => c.Id == id);
+                                            <li><a href="@Url.Action("Index","Catalog",new {name=catalog.UrlKeyWord})">@catalog.Name</a></li>
+                                        }
+                                    }
+                                </ul>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div><!-- end .radio-schedule-list -->
+    </div><!-- end .radio-block-inner -->
+</div><!-- end #radio-schedule -->
