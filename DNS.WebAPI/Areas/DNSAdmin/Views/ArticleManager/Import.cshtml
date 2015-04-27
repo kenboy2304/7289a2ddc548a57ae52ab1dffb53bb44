@@ -1,7 +1,59 @@
-﻿
+﻿@model IEnumerable<DNS.WebAPI.Models.MediaModel>
+
+
 @{
     ViewBag.Title = "Import";
+    var i = 0;
 }
 
-<h2>Import</h2>
+@*@foreach (var s in Model)
+{
+    i++;
+    <p>
+        @i. @s.Substring(0, s.Length-1)
+    </p>
+    
+}*@
 
+   
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PulishDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.CategoryId
+                    </td>
+                    <td>
+                        @item.PulishDate.ToLocalTime().ToString("dddd, dd-MM-yyyy hh:ss tt")
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@using (Html.BeginForm("Import", "ArticleManager"))
+{
+    @Html.TextArea("json", null, new { @class = "form-control", rows=6 })
+    <p>
+        <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+    </p>
+}

@@ -4,8 +4,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using DNS.WebAPI.Models;
 using DNS.WebAPI.Models.Enity;
 using PagedList;
@@ -59,7 +61,57 @@ namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
         public ActionResult Import()
         {
             
-            return View(new Article());
+            return View(new List<MediaModel>());
+        }
+        [HttpPost]
+        public ActionResult Import(string json)
+        {
+            var arr = Regex.Split(json, "\r\n");
+            var list = arr.Where(a=>!string.IsNullOrWhiteSpace(a)).Select(a =>new JavaScriptSerializer().Deserialize<MediaModel>(a.Substring(0, a.Length-1))).ToList();
+            foreach (var obj in list)
+            {
+                Catalog catalog;
+                if (!db.Catalogs.Any(c => c.Name.Equals(obj.CategoryId)))
+                {
+                    catalog = new Catalog
+                    {
+                        Name = obj.CategoryId,
+                        UrlKeyWord = MediaModel.ConvertToUnsign3(obj.CategoryId),
+                        Publish = true,
+                        DateCreated = DateTime.Now.ToLocalTime(),
+                        Title = obj.CategoryId,
+                        CatalogParentId = 2,
+                        ShowInMainMenu = true,
+                        AcceptDownload = true
+
+                    };
+                    db.Catalogs.Add(catalog);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    catalog = db.Catalogs.Single(c => c.Name.Equals(obj.CategoryId));
+                }
+                var article = new Article
+                {
+                    Name = obj.Name,
+
+                    DateCreated = obj.PulishDate.ToLocalTime(),
+                    PublishedDate = obj.PulishDate.ToLocalTime(),
+                    UrlKeyword = obj.GetUrlKeyword(),
+                    Mp3Url = obj.MediaUrl,
+                    Mp3Error = obj.IsError,
+                    Catalogs = new List<Catalog> { catalog },
+                    Type = ArticleType.Article,
+                    Title = obj.Name,
+                    Publish = true
+                };
+                if (db.Articles.Any(a => a.Name == article.Name && a.PublishedDate == article.PublishedDate))
+                    continue;
+                db.Articles.Add(article);
+                db.SaveChanges();
+            }
+            return View(list);
         }
 
 
