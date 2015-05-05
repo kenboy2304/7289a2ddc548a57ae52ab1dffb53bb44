@@ -2,7 +2,7 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
-            
+
             <li class="sidebar-search">
                 <form class="search" action="@Url.Action("Index","ArticleManager")" method="GET">
                     <div class="input-group custom-search-form">
@@ -16,18 +16,34 @@
                 </form>
                 <!-- /input-group -->
             </li>
-            
+
             <li>
                 <a href="@Url.Action("Index","Dashboard")"><i class="fa fa-dashboard fa-fw"></i> Bảng điều khiển</a>
             </li>
             <li>
-                <a href="@Url.Action("Index","CatalogManager")"><i class="fa fa-folder fa-fw"></i> Danh mục</a>
+                <a href="@Url.Action("Index","CatalogManager")"><i class="fa fa-folder fa-fw"></i> Danh mục <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="@Url.Action("Create","CatalogManager")"><i class="fa fa-plus fa-fw"></i> Thêm Danh Mục</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","CatalogManager")"><i class="fa fa-th-large fa-fw"></i> Quản Lý Danh Mục</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="#"><i class="fa fa-edit fa-fw"></i> Bài viết<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="@Url.Action("Index","PageManager")"><i class="fa fa-file-o fa-fw"></i> Trang</a>
+                        <a href="@Url.Action("Index","PageManager")"><i class="fa fa-file-o fa-fw"></i> Trang<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="@Url.Action("Create","PageManager")"><i class="fa fa-plus fa-fw"></i>  Tạo Trang</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","PageManager")"><i class="fa fa-th-large fa-fw"></i> Quản Lý Trang</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="@Url.Action("Index","ArticleManager")"><i class="fa fa-files-o fa-fw"></i>  Bài viết <span class="fa arrow"></span></a>
@@ -44,7 +60,16 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index","StudyBibleDailyManager")"><i class="fa fa-calendar fa-fw"></i> Bài học Kinh Thánh</a>
+                        <a href="@Url.Action("Index","StudyBibleDailyManager")"><i class="fa fa-calendar fa-fw"></i> Bài học Kinh Thánh <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            @for (var i = 1; i <= 12; i++)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Edit","StudyBibleDailyManager",new{month=i})"><i class="fa fa-arrow-circle-o-right fa-fw"></i> Tháng @i</a>
+                                </li>
+                            }
+                            
+                        </ul>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -64,7 +89,7 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            
+
             <li>
                 <a href="#"><i class="fa fa-gears fa-fw"></i> Hệ thống<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">

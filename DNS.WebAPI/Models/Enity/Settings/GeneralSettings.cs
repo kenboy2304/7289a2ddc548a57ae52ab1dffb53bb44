@@ -16,6 +16,8 @@ namespace DNS.WebAPI.Models.Enity.Settings
         [Display(Name = "Điện thoại")]
         public string Phone { get; set; }
         public string Email { get; set; }
+        [Display(Name = "Google API"), DataType(DataType.MultilineText)]
+        public string GoogleApi { get; set; }
 
 
         public int Id { get; set; }
