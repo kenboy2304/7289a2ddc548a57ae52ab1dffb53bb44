@@ -1,0 +1,165 @@
+﻿@using System.Web.UI.WebControls
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximun-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" contnet="">
+
+    <title>Đài Nguồn Sống</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="@Url.Content("~/App_themes/Default/js/mediajs/mediaelementplayer.css")" />
+    <link rel="stylesheet" href="@Url.Content("App_themes/Default/js/mediajs/mep-feature-playlist.css")" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/App_themes/Default/css/iconmoon.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/App_themes/Default/style.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/App_themes/Default/css/responsive.css")" />
+</head>
+    <body>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <div role="navigation" id="main-navigation">
+                <nav class="navbar navbar-default">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#"><img src="@Url.Content("~/App_Themes/Default/images/logo.png")" alt="#"></a>
+                        </div>
+
+                        @Html.Action("MainMenuModule","Module")
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div><!-- end #main-navigation -->
+            <!-- /Navigation -->
+            @RenderBody()
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-6 col-xs-6 footer-list">
+                            <div class="footer-list-block">
+                                <h4>Chương Trình</h4>
+                                <ul>
+                                    <li><a href="#">Thờ Phượng Giảng Luận</a></li>
+                                    <li><a href="#">Học Kinh Thánh</a></li>
+                                    <li><a href="#">Niềm Tin và Cuộc Sống</a></li>
+                                    <li><a href="#">Ca Khúc Tâm Linh</a></li>
+                                    <li><a href="#">Lời Hằng Sống</a></li>
+
+                                    <li><a href="#">Niềm Hy Vọng</a></li>
+                                    <li><a href="#">Giờ Phụ Nữ</a></li>
+                                    <li><a href="#">Lẽ Thật Cho Đời Sống</a></li>
+                                    <li><a href="#">Sống Đạo Gia Đình</a></li>
+                                    <li><a href="#">Sống Đạo Tăng Trưởng</a></li>
+
+                                    <li><a href="#">Sống Đạo Áp Dụng</a></li>
+                                    <li><a href="#">Văn Phẩm Cơ Đốc</a></li>
+                                    <li><a href="#">Niềm Tin Minh Họa</a></li>
+                                    <li><a href="#">Làm Môn Đệ Chúa</a></li>
+                                    <li><a href="#">Chương Trình Hôm Nay</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-6 col-xs-6 footer-list">
+                            <div class="footer-list-block">
+                                <h4>Thính Giả</h4>
+                                <ul>
+                                    <li><a href="#">Thư Thính Giả</a></li>
+                                    <li><a href="#">Dâng Hiến</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="footer-list-block">
+                                <h4>Nguồn Sống</h4>
+                                <ul>
+                                    <li><a href="#">Giới Thiệu</a></li>
+                                    <li><a href="#">Nhịp Cầu Nguồn Sống</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="footer-list-block">
+                                <h4>Tài Liệu</h4>
+                                <ul>
+                                    <li><a href="#">Downloads</a></li>
+                                    <li><a href="#">Lời Chúa Mỗi Ngày</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="footer-list-block">
+                                <h4>Hỗ Trợ</h4>
+                                <ul>
+                                    <li><a href="#">Lịch Trình Phát Thanh</a></li>
+                                    <li><a href="#">Hỗ Trợ Kỹ Thuật</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 col-sm-12 col-xs-12 fm-schedule">
+                            <div class="inner">
+                                @Html.Action("FrequencyScheduleModule","Module")
+
+                                <div class="footer-block-list connect-social">
+                                    <h4>Kết Nối Với Đài Nguồn Sống</h4>
+                                    <nav>
+                                        @{
+                                            if (!String.IsNullOrEmpty((string)ViewBag.Facebook))
+                                            {
+                                                <a href="@ViewBag.Facebook" class="facebook"><i class="icon-facebook"></i>Facebook</a>
+                                            }
+                                            if (!String.IsNullOrEmpty((string)ViewBag.Twitter))
+                                            {
+                                                <a href="@ViewBag.Twitter" class="twitter"><i class="icon-twitter"></i>Twitter</a>
+                                            }
+                                            if (!String.IsNullOrEmpty((string)ViewBag.GooglePlus))
+                                            {
+                                                <a href="@ViewBag.GooglePlus" class="googleplus"><i class="icon-googleplus"></i>Google +</a>
+                                            }
+}
+                                        
+                                        @*<a href="@("mailto:"+(string)ViewBag.Email)" class="email"><i class="icon-mail"></i>Email</a>*@
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="copyright col-md-12 col-sm-12 col-xs-12">
+                            <div class="inner">
+                                <p><strong>@ViewBag.Name</strong></p>
+                                <p>@ViewBag.CopyRight</p>
+                                <p>@ViewBag.Address</p>
+                                
+                                <p>@("Email: "+ViewBag.Email)</p>
+                            </div>
+                        </div><!-- end .copyright -->
+                    </div>
+                </div>
+
+            </footer>
+        </div><!-- end #wrapper -->
+        <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="@Url.Content("~/App_themes/Default/js/mediajs/mediaelement-and-player.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/App_themes/Default/js/mediajs/mep-feature-playlist.js")"></script>
+        <script src="@Url.Content("~/App_themes/Default/js/site.js")"></script>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5327f1e3378c5bfa" async="async"></script>
+
+        <div id="fb-root"></div>
+        <script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=307394109435345&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+        @RenderSection("scripts", required:false)
+    </body>
+</html>
