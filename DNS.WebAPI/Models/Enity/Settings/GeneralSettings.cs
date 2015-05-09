@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DNS.WebAPI.Models.Enity.Settings
 {
@@ -44,6 +45,10 @@ namespace DNS.WebAPI.Models.Enity.Settings
 
         [Display(Name = "Kết thúc")]
         public DefaultMedia Endding { get; set; }
+
+        //design
+        [AllowHtml,DataType(DataType.Html)]
+        public string Footer { get; set; }
     }
 
     public class DefaultMedia

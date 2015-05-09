@@ -75,7 +75,7 @@
             @Html.LabelFor(model => model.PublishedDate, htmlAttributes: new { @class = "control-label col-md-2 col-md-offset-6" })
             <div class="col-md-4">
 
-                <input type="datetime" name="PublishedDate" id="PublishedDate" value="@DateTime.Today.ToString("d/MM/yyyy HH:mm") class="form-control" />
+                <input type="datetime" name="PublishedDate" id="PublishedDate" value="@DateTime.Today.ToString("d/MM/yyyy HH:mm")" class="form-control" />
                 @Html.HiddenFor(model => model.Publish)
                 @*@Html.ValidationMessageFor(model => model.PublishedDate, "", new { @class = "text-danger" })*@
             </div>

@@ -3,16 +3,17 @@
 <!-- Daily Player -->
 <div id="daily-player" style="">
     <div class="search">
-        <form action="#">
-            <input type="text" placeholder="Tìm bài giảng">
+        @using (Html.BeginForm("Search", "Article", FormMethod.Get))
+        {
+            <input name="query" type="text" placeholder="Tìm bài giảng">
             <button><i class="icon-search"></i></button>
-        </form>
+        }
     </div><!-- end .search -->
 
     <div class="radio-player">
         <div class="date">
             <div class="date-inner">
-                <span class="week-day"> @{
+                <span class="week-day" style="font-family: arial"> @{
                                              string a = DateTime.Today.ToString("dddd");
                                              @a            
                                                                         }</span>
@@ -21,7 +22,7 @@
                 <span class="year">Năm @DateTime.Today.ToString("yyyy")</span>
             </div>
             <div class="older-date">
-                <a href="@Url.Action("Daily","Article", new {date=DateTime.Today.AddDays(-1).ToString("d-M-yyyy")})"><i class="icon-arrow-left4"></i>@DateTime.Today.AddDays(-1).ToString("dddd, d/M/yyyy")</a>
+                <a href="@Url.Action("Daily","Article", new {date=DateTime.Today.AddDays(-1).ToString("d-M-yyyy")})" style="font-family: arial"><i class="icon-arrow-left4"></i>@DateTime.Today.AddDays(-1).ToString("dddd, d/M/yyyy")</a>
             </div><!-- end .older-date -->
         </div>
 

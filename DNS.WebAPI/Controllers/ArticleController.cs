@@ -8,6 +8,7 @@ using DNS.WebAPI.Models;
 using DNS.WebAPI.Models.Enity;
 using DNS.WebAPI.Models.Enity.Settings;
 using Microsoft.Ajax.Utilities;
+using NinjaNye.SearchExtensions;
 using PagedList;
 
 namespace DNS.WebAPI.Controllers
@@ -33,6 +34,16 @@ namespace DNS.WebAPI.Controllers
                 
             };
             return View(data);
+        }
+        public ActionResult Search(string query, int page=1, int size = 10)
+        {
+            ViewBag.Query = query;
+            var term = query.Split(' ');
+            var r = db.Articles.Where(a => a.Type == ArticleType.Article)
+                               .Search(a=>a.Name, a=>a.UrlKeyword).ContainingAll(term)
+                               .OrderByDescending(a=>a.PublishedDate)
+                               .ToPagedList(page,size);
+            return View(r);
         }
         public ActionResult Daily(string date)
         {

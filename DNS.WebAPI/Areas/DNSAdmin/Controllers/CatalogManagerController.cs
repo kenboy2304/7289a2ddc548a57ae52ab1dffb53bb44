@@ -13,6 +13,7 @@ using Microsoft.Owin.Security.Provider;
 
 namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,Post")]
     public class CatalogManagerController : Controller
     {
         private DNSContext db = new DNSContext();
@@ -54,7 +55,7 @@ namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,UrlKeyWord,Brief,Desc,ShowInMainMenu,Url,CatalogParentId,Publish,Order")] Catalog catalog)
+        public ActionResult Create([Bind(Include = "Id,Name,UrlKeyWord,ThumbnailUrl,Brief,Desc,ShowInMainMenu,Url,CatalogParentId,Publish,Order")] Catalog catalog)
         {
             if (ModelState.IsValid)
             {
@@ -104,12 +105,13 @@ namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,UrlKeyWord,Brief,Desc,ShowInMainMenu,Url,CatalogParentId,Publish,Order")] Catalog catalog)
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "Id,Name,UrlKeyWord,ThumbnailUrl,Brief,Desc,ShowInMainMenu,Url,CatalogParentId,Publish,Order")] Catalog catalog)
         {
             if (ModelState.IsValid)
             {
                 var update = db.Catalogs.Find(catalog.Id);
-                if (TryUpdateModel(update,new[]{"Id", "Name", "UrlKeyWord", "Brief", "Desc", "ShowInMainMenu", "Url", "CatalogParentId", "Publish","Order"}))
+                if (TryUpdateModel(update, new[] { "Id", "Name", "UrlKeyWord", "ThumbnailUrl", "Brief", "Desc", "ShowInMainMenu", "Url", "CatalogParentId", "Publish", "Order" }))
                 {
                     db.Entry(update).State = EntityState.Modified;
                     db.SaveChanges();

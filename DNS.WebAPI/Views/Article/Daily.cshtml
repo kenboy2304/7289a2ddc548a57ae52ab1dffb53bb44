@@ -8,7 +8,7 @@
                 <div class="inner">
                     <div class="entry">
                         <div class="entry-title">
-                            <h1>
+                            <h1 style="font-family: arial; font-weight: bold">
                                 @{
                                     var date = (DateTime) ViewBag.Date;
                                     @date.ToString("dddd, d/M/yyyy");
@@ -32,10 +32,10 @@
                             </div>
                             <br/>
                             <div class="">
-                                <span class=""><a href="@Url.Action("Daily", new { date = date.AddDays(-1).ToString("d-M-yyyy") })" class="btn btn-sm btn-default"><i class="icon-arrow-left8"></i> @date.AddDays(-1).ToString("dddd, d/M/yyyy")</a></span>
+                                <span class=""><a style="font-family: arial" href="@Url.Action("Daily", new { date = date.AddDays(-1).ToString("d-M-yyyy") })" class="btn btn-sm btn-default"><i class="icon-arrow-left8"></i> @date.AddDays(-1).ToString("dddd, d/M/yyyy")</a></span>
                                 @if (date.Date < DateTime.Today)
                                 {
-                                    <span class="pull-right"><a href="@Url.Action("Daily", new { date = date.AddDays(1).ToString("d-M-yyyy") })" class="btn btn-sm btn-default">@date.AddDays(1).ToString("dddd, d/M/yyyy") <i class="icon-arrow-right7"></i></a></span>
+                                    <span class="pull-right"><a style="font-family: arial" href="@Url.Action("Daily", new { date = date.AddDays(1).ToString("d-M-yyyy") })" class="btn btn-sm btn-default">@date.AddDays(1).ToString("dddd, d/M/yyyy") <i class="icon-arrow-right7"></i></a></span>
                                 }
                                 
                             </div>
@@ -46,7 +46,7 @@
                             <ul>
                                 @for (var i = 1; i <= 10; i++)
                                 {
-                                    <li><a href="@Url.Action("Daily", "Article", new { date = date.AddDays(-i).ToString("d-M-yyyy") })">Chương trình @date.AddDays(-i).ToString("dddd, d/M/yyyy")</a></li>
+                                    <li><a style="font-family: arial" href="@Url.Action("Daily", "Article", new { date = date.AddDays(-i).ToString("d-M-yyyy") })">Chương trình @date.AddDays(-i).ToString("dddd, d/M/yyyy")</a></li>
                                 }
                                 
                             </ul>

@@ -41,6 +41,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NinjaNye.SearchExtensions">
+      <HintPath>..\packages\NinjaNye.SearchExtensions.1.5.5534.18628\lib\net40\NinjaNye.SearchExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -180,12 +183,10 @@
     <Compile Include="Areas\DNSAdmin\Controllers\ArticleManagerController.cs" />
     <Compile Include="Areas\DNSAdmin\Controllers\CatalogManagerController.cs" />
     <Compile Include="Areas\DNSAdmin\Controllers\CatalogResolve.cs" />
-    <Compile Include="Areas\DNSAdmin\Controllers\ContentTypeManagerController.cs" />
     <Compile Include="Areas\DNSAdmin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\DNSAdmin\Controllers\DatabaseController.cs" />
     <Compile Include="Areas\DNSAdmin\Controllers\PageManagerController.cs" />
     <Compile Include="Areas\DNSAdmin\Controllers\StudyBibleDailyManagerController.cs" />
-    <Compile Include="Areas\DNSAdmin\Controllers\TypeInputManagerController.cs" />
     <Compile Include="Areas\DNSAdmin\Controllers\SettingsController.cs" />
     <Compile Include="Areas\DNSAdmin\DNSAdminAreaRegistration.cs" />
     <Compile Include="Areas\DNSAdmin\Models\ArticleModel.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Areas\DNSAdmin\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\DNSAdmin\Controllers\UserAdminController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,6 +228,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Model\MediaModel.cs" />
+    <Compile Include="Models\Model\SiteMapModel.cs" />
     <Compile Include="Models\StudyBibleDaily.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -1343,13 +1346,13 @@
     <Content Include="Views\Article\Daily.cshtml" />
     <Content Include="Views\Article\BibleDaily.cshtml" />
     <Content Include="Views\Article\Page.cshtml" />
+    <Content Include="Views\Article\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\DNSAdmin\Views\Database\" />
-    <Folder Include="Areas\DNSAdmin\Views\Position\" />
     <Folder Include="Models\DailyStudy\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\System\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

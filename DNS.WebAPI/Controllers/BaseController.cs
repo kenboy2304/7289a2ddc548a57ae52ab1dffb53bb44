@@ -22,6 +22,7 @@ namespace DNS.WebAPI.Controllers
                 ViewBag.Phone = general.Phone;
                 ViewBag.Email = general.Email;
 
+                ViewBag.Footer = general.Footer;
                 ViewBag.Title = general.Title;
                 ViewBag.Desc = general.Desc;
                 ViewBag.Keyword = general.KeyWord;
@@ -31,6 +32,8 @@ namespace DNS.WebAPI.Controllers
                 ViewBag.Twitter = general.Twitter;
                 ViewBag.GooglePlus = general.GooglePlus;
                 ViewBag.Youtube = general.Youtube;
+
+                ViewBag.GoogleApi = general.GoogleApi;
             }
 
             base.Initialize(requestContext);

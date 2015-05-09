@@ -13,7 +13,7 @@
                         var catalog = item.Catalogs.First();
                         <li>
                             <h2 class="aside-title"><a href="@Url.Action("Index","Article", new {catalog = catalog.UrlKeyWord, name = item.UrlKeyword})">@item.Name</a></h2>
-                            <span class="aside-desc">@item.PublishedDate.ToString("dddd, d/M/yyyy")<br /> Loạt Bài: <a href="@Url.Action("Index","Catalog",new {name = catalog.UrlKeyWord})">@catalog.Name</a></span>
+                            <span style="font-family: arial" class="aside-desc">@item.PublishedDate.ToString("dddd, d/M/yyyy")<br /> Loạt Bài: <a href="@Url.Action("Index","Catalog",new {name = catalog.UrlKeyWord})">@catalog.Name</a></span>
                         </li>
                     }
                 </ul>

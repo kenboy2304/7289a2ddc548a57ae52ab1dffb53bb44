@@ -14,6 +14,7 @@ using PagedList;
 
 namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,Post")]
     public class ArticleManagerController : Controller
     {
         private DNSContext db = new DNSContext();
@@ -32,8 +33,14 @@ namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
             var list = db.Articles.ToList()
                 .Where(article => 
                         db.Articles.Count(a => a.Name == article.Name) > 1)
-            .OrderBy(a=>a.Name).ThenByDescending(a=>a.PublishedDate).ToList();
-            return View("Index", list.ToPagedList(1, 100));
+            .OrderBy(a => a.Name).ThenByDescending(a => a.PublishedDate).ToPagedList(page, 100);
+            return View("Index", list);
+        }
+        public ActionResult ErrorLink(int page = 1)
+        {
+            var list = db.Articles.Where(article => article.Mp3Error)
+            .OrderBy(a => a.Name).ThenByDescending(a => a.PublishedDate).ToPagedList(page, 100);
+            return View("Index", list);
         }
 
         // GET: DNSAdmin/ArticleManager/Details/5
@@ -121,6 +128,7 @@ namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Create(Article article, int[] catalogIds)
         {
             if (catalogIds != null)
@@ -160,6 +168,7 @@ namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit(Article article, int[] catalogIds)
         {
             if (ModelState.IsValid)
@@ -202,6 +211,7 @@ namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
         // POST: DNSAdmin/ArticleManager/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        
         public ActionResult DeleteConfirmed(int id)
         {
             var article = db.Articles.Find(id);

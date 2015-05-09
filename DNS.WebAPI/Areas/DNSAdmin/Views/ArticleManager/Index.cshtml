@@ -35,8 +35,7 @@
     {
         <tr class="@(item.Mp3Error ? "bg-danger":"" )">
             <td>
-                @i |
-                 @item.Mp3Error
+                @((Model.PageNumber-1)*100 +i)
                 @{ i++;}
             </td>
             <td>
@@ -71,8 +70,7 @@
     }
 
 </table>
-
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+@Html.PagedListPager(Model, page => Url.Action(ViewContext.RouteData.GetRequiredString("action"), new { page }))
 
 @section scripts
 {

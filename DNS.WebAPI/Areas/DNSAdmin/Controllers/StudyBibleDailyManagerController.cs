@@ -10,6 +10,7 @@ using DNS.WebAPI.Models.Enity;
 
 namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
 {
+    [Authorize(Roles = "Admin,Manager")]
     public class StudyBibleDailyManagerController : Controller
     {
         private DNSContext db = new DNSContext();
@@ -52,8 +53,11 @@ namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
                     db.Entry(setting).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index");
-                
+                ViewBag.Update = "Cập nhật thành công!";
+            }
+            else
+            {
+                ViewBag.Error = "Cập nhật thất bại!";
             }
             return View(monthly);
         }

@@ -13,7 +13,12 @@ namespace DNS.WebAPI
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-
+            config.Formatters.XmlFormatter.UseXmlSerializer = true;
+            config.Routes.MapHttpRoute(
+                name: "Sitemap",
+                routeTemplate: "api/sitemap.xml",
+                defaults: new { controller = "System", action = "SiteMap" }
+            );
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

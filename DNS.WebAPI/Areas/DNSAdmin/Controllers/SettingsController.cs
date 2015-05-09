@@ -10,6 +10,7 @@ using DNS.WebAPI.Models.Enity.Settings;
 
 namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
 {
+    [Authorize(Roles = "Admin,Manager")]
     public class SettingsController : Controller
     {
 

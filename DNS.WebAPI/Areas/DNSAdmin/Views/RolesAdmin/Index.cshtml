@@ -3,13 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Tạo Role", "Create", "", new { @class = "btn btn-sm btn-primary" })
 </p>
-<table class="table">
+<table class="table table-bordered table-hover table-responsive">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)

@@ -1,4 +1,5 @@
-﻿@model DNS.WebAPI.Models.ArticleDetailModel
+﻿@using DNS.WebAPI.Models
+@model DNS.WebAPI.Models.ArticleDetailModel
 @{
     ViewBag.Title = Model.Article.Name;
 }
@@ -17,12 +18,15 @@
                             </h1><!-- end .entry-title -->
 
                             <nav class="meta">
-                                <span class="meta-day"><i class="icon-calendar"></i>@Model.Article.PublishedDate.ToString("dddd, d/M/yyyy")</span>
+                                <span class="meta-day" style="font-family: arial">
+                                    <i class="icon-calendar"></i>
+                                    <a href="@Url.Action("Daily", "Article", new { date = Model.Article.PublishedDate.ToString("d-M-yyyy") })">@Model.Article.PublishedDate.ToString("dddd, d/M/yyyy")</a>
+                                </span>
                                 <span class="meta-category"><i class="icon-archive"></i><strong>Loạt bài: </strong><a href="@Url.Action("Index","Catalog", new {name = @Model.Catalog.UrlKeyWord})">@Model.Catalog.Name</a></span>
                             </nav>
                         </div>
                     </div><!-- end .entry -->
-                    
+
                     <div class="entry-player">
                         <div class="control">
                             <audio id="page-audio" type="audio/mp3" width="100%" autoplay controls>
@@ -30,26 +34,54 @@
                             </audio>
                         </div>
                     </div><!-- end .entry-player -->
-
-                    <div class="entry-related">
-                        <h4>Cùng chủ đề</h4>
-
-                        <ul>
-                            @foreach (var article in Model.ReleatedArticles)
+                    <br />
+                    @{
+                        var next = Model.ReleatedArticles.LastOrDefault(a => a.PublishedDate > Model.Article.PublishedDate);
+                        var prev = Model.ReleatedArticles.FirstOrDefault(a => a.PublishedDate < Model.Article.PublishedDate);
+                    }
+                    <div class="col-lg-12">
+                        
+                        @helper maxWidth(string s, int max)
+                        {
+                            if (s.Length > max)
                             {
-                                <li><a style="@(article.Id == Model.Article.Id ? "color: #f89d31" : "")" href="@Url.Action("Index","Article", new {name = article.UrlKeyword})"> @article.Name</a></li>
+                                @(s.Substring(0, max) + "...")
                             }
-                        </ul>
-                    </div><!-- end .entry-related -->
+                            else
+                            {
+                                @s
+                            }
+                        }
 
-                    <div class="entry-socials">
-                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                        <div class="addthis_native_toolbox"></div>
+                        @if (prev != null)
+                        {
+                            <span class="pull-left"><a style="font-family: arial" href="@Url.Action("Index","Article", new {name = prev.UrlKeyword})" class=" btn btn-sm btn-default"><i class="icon-arrow-left8"></i> @maxWidth(prev.Name,150)</a></span>
+                        }
+                        @if (next != null)
+                        {
+                            <span class="pull-right"><a style="font-family: arial" href="@Url.Action("Index","Article", new {name = next.UrlKeyword})" class=" btn btn-sm btn-default">@maxWidth(next.Name, 150) <i class="icon-arrow-right7"></i></a></span>
+                        }
+
                     </div>
-                </div>
-            </div><!-- end .primary -->
+                    <br/>
+                        <div class="entry-related">
+                            <h4>Cùng chủ đề</h4>
 
-            @Html.Action("ArticleNewest","Module")
+                            <ul>
+                                @foreach (var article in Model.ReleatedArticles)
+                            {
+                                    <li><a style="@(article.Id == Model.Article.Id ? "color: #f89d31" : "")" href="@Url.Action("Index","Article", new {name = article.UrlKeyword})"> @article.Name</a></li>
+                            }
+                            </ul>
+                        </div><!-- end .entry-related -->
+
+                        <div class="entry-socials">
+                            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                            <div class="addthis_native_toolbox"></div>
+                        </div>
+                    </div>
+                </div><!-- end .primary -->
+                @Html.Action("ArticleNewest","Module")
+            </div>
         </div>
     </div>
-</div>

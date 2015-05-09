@@ -9,11 +9,15 @@ namespace IdentitySample
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
             routes.MapRoute(
                 name: "Home",
                 url: "",
                 defaults: new { controller = "Home", action = "Index"}
+            );
+            routes.MapRoute(
+                name: "Search",
+                url: "tim-kiem/",
+                defaults: new { controller = "Article", action = "Search" }
             );
             routes.MapRoute(
                 name: "Page",

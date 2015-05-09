@@ -12,6 +12,7 @@ using DNS.WebAPI.Models.Enity;
 
 namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,Post")]
     public class PageManagerController : Controller
     {
         private DNSContext db = new DNSContext();

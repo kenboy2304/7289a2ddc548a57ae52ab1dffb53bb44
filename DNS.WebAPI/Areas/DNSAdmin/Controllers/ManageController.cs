@@ -1,13 +1,14 @@
-﻿using IdentitySample.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using IdentitySample.Controllers;
+using IdentitySample.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
-namespace IdentitySample.Controllers
+namespace DNS.WebAPI.Areas.DNSAdmin.Controllers
 {
     [Authorize]
     public class ManageController : Controller
